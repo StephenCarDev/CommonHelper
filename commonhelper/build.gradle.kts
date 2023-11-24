@@ -1,3 +1,6 @@
+import java.util.Date
+import java.text.SimpleDateFormat
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -19,6 +22,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -33,6 +43,18 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    val appName = "CommonHelper"
+    val buildTime = SimpleDateFormat("yyyyMMdd").format(Date())
+    val versionName = "1.0.$buildTime"
+    android.libraryVariants.configureEach {
+        val buildType = this.buildType.name
+        outputs.all {
+            if (this is com.android.build.gradle.internal.api.LibraryVariantOutputImpl) {
+                this.outputFileName = "${appName}_${versionName}_${buildType}.apk"
+            }
+        }
     }
 }
 
@@ -51,6 +73,10 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
+
+    // 键值对存储，三选一
+    implementation("com.tencent:mmkv:1.3.2")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // 协程 Coroutine
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")

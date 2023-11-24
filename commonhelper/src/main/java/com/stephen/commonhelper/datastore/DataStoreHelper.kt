@@ -5,4 +5,5 @@ package com.stephen.commonhelper.datastore
  * 协程实现，可以方便地获取存储的结果回调
  */
 object DataStoreHelper {
+
 }
