@@ -61,11 +61,14 @@ android {
 dependencies {
 
     implementation(fileTree("libs").include("*.aar", "*.jar"))
-    // retrifit
+    // retrofit
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    // mqtt
+    implementation ("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
 
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.google.protobuf:protobuf-java:3.19.4")
